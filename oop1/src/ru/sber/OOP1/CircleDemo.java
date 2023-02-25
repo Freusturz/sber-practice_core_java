@@ -1,4 +1,4 @@
-package OOP;
+package ru.sber.OOP1;
 import java.util.Scanner;
 
 public class CircleDemo {
@@ -10,7 +10,6 @@ public class CircleDemo {
         System.out.print("Введите цвет круга");
         String ColorCircle = in.next();
 
-        in.close();
 
         Circle circle = new Circle(rad, ColorCircle);
 

@@ -1,5 +1,5 @@
-package OOP;
-import java.util.Scanner;
+package ru.sber.OOP1;
+
 public class AuthorBookDemo {
     public static void main(String[] args) {
         Author lewis = new Author("Илья Щиплецов", "Мужской");

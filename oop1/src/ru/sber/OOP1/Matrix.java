@@ -1,4 +1,4 @@
-package OOP;
+package ru.sber.OOP1;
 
 public class Matrix {
     private final double[][] matrix;

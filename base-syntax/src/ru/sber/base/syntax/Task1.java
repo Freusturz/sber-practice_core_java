@@ -46,13 +46,13 @@ class ArrayBubble {
         }
     }
 }
-public class task1 {
-    public static void main(String[] args) {
-        int Chislo = 11;
-        ArrayBubble array = new ArrayBubble(Chislo);
-        array.into(Chislo);
-        array.printers();
-        array.bubbleSort();
-        array.printer();
-    }
-}
+//public class task1 {
+//    public static void main(String[] args) {
+//        int Chislo = 11;
+//        ArrayBubble array = new ArrayBubble(Chislo);
+//        array.into(Chislo);
+//        array.printers();
+//        array.bubbleSort();
+//        array.printer();
+//    }
+//}

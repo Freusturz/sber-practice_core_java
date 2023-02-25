@@ -1,4 +1,4 @@
-package OOP;
+package ru.sber.OOP1;
 
 public enum PizzaSize {
         SMALL("Маленькая"),

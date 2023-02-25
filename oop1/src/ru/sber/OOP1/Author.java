@@ -1,5 +1,4 @@
-package OOP;
-
+package ru.sber.OOP1;
 public class Author {
     private String name;
 
