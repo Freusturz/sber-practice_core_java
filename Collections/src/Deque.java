@@ -1,13 +1,13 @@
 import java.util.NoSuchElementException;
-public interface Deque extends Collection {
+public interface Deque<T> extends Collection<T> {
 
-    void addFirst(Object item);
-    void addLast(Object item);
+    void addFirst(T item);
+    void addLast(T item);
     //
-    Object getFirst() throws NoSuchElementException;
-    Object getLast() throws NoSuchElementException;
-    Object pollFirst();
-    Object pollLast();
-    Object removeFirst() throws NoSuchElementException;
-    Object removeLast() throws NoSuchElementException;
+    T getFirst() throws NoSuchElementException;
+    T getLast() throws NoSuchElementException;
+    T pollFirst();
+    T pollLast();
+    T removeFirst() throws NoSuchElementException;
+    T removeLast() throws NoSuchElementException;
 }

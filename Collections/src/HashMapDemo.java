@@ -3,7 +3,7 @@ public class HashMapDemo {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        HashMap hashMap = new HashMap();
+        HashMap<Integer, Integer> hashMap = new HashMap();
 
         System.out.println("Введите количество чисел");
         int amountOfNumber = scanner.nextInt();

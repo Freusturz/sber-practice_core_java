@@ -1,13 +1,13 @@
 import java.util.NoSuchElementException;
 import java.util.Objects;
-public class LinkedList implements Deque, list, Iterable<Object> {
-    private static class Iterator implements java.util.Iterator<Object> {
+public class LinkedList<T> implements Deque<T>, list<T>, Iterable<T> {
+    private static class Iterator<T> implements java.util.Iterator<T> {
 
-        private final LinkedList list;
+        private final LinkedList<T> list;
 
         private int curInd = 0;
 
-        public Iterator(LinkedList list) {
+        public Iterator(LinkedList<T> list) {
             this.list = list;
         }
 
@@ -15,7 +15,7 @@ public class LinkedList implements Deque, list, Iterable<Object> {
             return curInd < list.size();
         }
 
-        public Object next() throws NoSuchElementException {
+        public T next() throws NoSuchElementException {
             if (hasNext()) {
                 return list.get(curInd++);
             }
@@ -27,13 +27,13 @@ public class LinkedList implements Deque, list, Iterable<Object> {
 
     private static class Node {
 
-        public Object data;
+        public T data;
 
-        public Node previous;
+        public Node<T> previous;
 
-        public Node next;
+        public Node<T> next;
 
-        public Node(Object data, Node previous, Node next) {
+        public Node(T data, Node previous, Node next) {
             this.data = data;
             this.previous = previous;
             this.next = next;
@@ -41,9 +41,9 @@ public class LinkedList implements Deque, list, Iterable<Object> {
 
     }
 
-    private Node head;
+    private Node<T> head;
 
-    private Node tail;
+    private Node<T> tail;
 
     private int size;
 
@@ -65,7 +65,7 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         }
     }
 
-    private Node getNode(int index) throws IndexOutOfBoundsException {
+    private Node<T> getNode(int index) throws IndexOutOfBoundsException {
         checkElementIndex(index);
 
         Node currentNode = this.head;
@@ -77,9 +77,9 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return currentNode;
     }
 
-    private Node removeNode(Node nodeToRemove) {
-        Node nextNode = nodeToRemove.next;
-        Node previousNode = nodeToRemove.previous;
+    private Node<T> removeNode(Node<T> nodeToRemove) {
+        Node<T> nextNode = nodeToRemove.next;
+        Node<T> previousNode = nodeToRemove.previous;
 
         if (previousNode == null) {
             this.head = nextNode;
@@ -97,7 +97,7 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return nextNode;
     }
 
-    private LinkedList(Node head, Node tail, int size) {
+    private LinkedList(Node<T> head, Node<T> tail, int size) {
         this.head = head;
         this.tail = tail;
         this.size = size;
@@ -118,19 +118,19 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return this.size == 0;
     }
 
-    public boolean contains(Object item) {
+    public boolean contains(T item) {
         return indexOf(item) >= 0;
     }
 
-    public boolean add(Object item) {
+    public boolean add(T item) {
         addLast(item);
         return true;
     }
 
-    public boolean remove(Object item) {
+    public boolean remove(T item) {
         boolean atLeastOneDeletion = false;
 
-        Node currentNode = this.head;
+        Node<T> currentNode = this.head;
 
         while (currentNode != null) {
             if (Objects.equals(currentNode.data, item)) {
@@ -151,9 +151,9 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         this.size = 0;
     }
 
-    public void addFirst(Object item) {
-        Node headNode = this.head;
-        Node newNode = new Node(item, null, headNode);
+    public void addFirst(T item) {
+        Node<T> headNode = this.head;
+        Node<T> newNode = new Node(item, null, headNode);
         this.head = newNode;
 
         if (headNode == null) {
@@ -165,9 +165,9 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         this.size++;
     }
 
-    public void addLast(Object item) {
-        Node tailNode = this.tail;
-        Node newNode = new Node(item, tailNode, null);
+    public void addLast(T item) {
+        Node<T> tailNode = this.tail;
+        Node<T> newNode = new Node(item, tailNode, null);
         this.tail = newNode;
 
         if (tailNode == null) {
@@ -179,21 +179,21 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         this.size++;
     }
 
-    public Object getFirst() throws NoSuchElementException {
+    public T getFirst() throws NoSuchElementException {
         checkBounds();
 
         return this.head.data;
     }
 
 
-    public Object getLast() throws NoSuchElementException {
+    public T getLast() throws NoSuchElementException {
         checkBounds();
 
         return this.tail.data;
     }
 
 
-    public Object pollFirst() {
+    public T pollFirst() {
         if (this.head == null) {
             return null;
         }
@@ -201,7 +201,7 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return this.head.data;
     }
 
-    public Object pollLast() {
+    public T pollLast() {
         if (this.tail == null) {
             return null;
         }
@@ -209,10 +209,10 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return this.tail.data;
     }
 
-    public Object removeFirst() throws NoSuchElementException {
+    public T removeFirst() throws NoSuchElementException {
         checkBounds();
 
-        Object objectToReturn = this.head.data;
+        T objectToReturn = this.head.data;
         Node nextNode = this.head.next;
         this.head = nextNode;
 
@@ -226,10 +226,10 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return objectToReturn;
     }
 
-    public Object removeLast() throws NoSuchElementException {
+    public T removeLast() throws NoSuchElementException {
         checkBounds();
 
-        Object objectToReturn = this.tail.data;
+        T objectToReturn = this.tail.data;
         Node previousNode = this.tail.previous;
         this.tail = previousNode;
 
@@ -243,15 +243,15 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return objectToReturn;
     }
 
-    public void add(int index, Object item) {
+    public void add(int index, T item) {
         checkPositionIndex(index);
 
         if (this.size == index) {
             addLast(item);
         } else {
-            Node linkToNode = getNode(index);
-            Node previousNode = linkToNode.previous;
-            Node newNode = new Node(item, previousNode, linkToNode);
+            Node<T> linkToNode = getNode(index);
+            Node<T> previousNode = linkToNode.previous;
+            Node<T> newNode = new Node(item, previousNode, linkToNode);
             linkToNode.previous = newNode;
 
             if (previousNode == null) {
@@ -264,7 +264,7 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         }
     }
 
-    public void set(int index, Object item) {
+    public void set(int index, T item) {
         if (this.size == index) {
             addLast(item);
         } else if (this.size > index) {
@@ -272,11 +272,11 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         }
     }
 
-    public Object get(int index) throws IndexOutOfBoundsException {
+    public T get(int index) throws IndexOutOfBoundsException {
         return getNode(index).data;
     }
 
-    public int indexOf(Object item) {
+    public int indexOf(T item) {
         int i = 0;
 
         for (Node currentNode = this.head; currentNode != null; currentNode = currentNode.next) {
@@ -290,10 +290,10 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return -1;
     }
 
-    public int lastIndexOf(Object item) {
+    public int lastIndexOf(T item) {
         int index = this.size;
 
-        for (Node currentNode = this.tail; currentNode != null; currentNode = currentNode.previous) {
+        for (Node<T> currentNode = this.tail; currentNode != null; currentNode = currentNode.previous) {
             index--;
 
             if (Objects.equals(currentNode.data, item)) {
@@ -304,28 +304,28 @@ public class LinkedList implements Deque, list, Iterable<Object> {
         return -1;
     }
 
-    public Object removeAt(int index) throws IndexOutOfBoundsException {
+    public T removeAt(int index) throws IndexOutOfBoundsException {
         checkElementIndex(index);
 
-        Node currentNode = this.head;
+        Node<T> currentNode = this.head;
 
         while (index-- > 0) {
             currentNode = currentNode.next;
         }
 
-        Object objectToReturn = currentNode.data;
+        T objectToReturn = currentNode.data;
         removeNode(currentNode);
         return objectToReturn;
     }
 
-    public list subList(int from, int to) throws IndexOutOfBoundsException {
+    public list<T> subList(int from, int to) throws IndexOutOfBoundsException {
         checkElementIndex(from);
         checkPositionIndex(to);
 
         return new LinkedList(getNode(from), getNode(to - 1), to - from);
     }
 
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         return new Iterator(this);
     }
 }

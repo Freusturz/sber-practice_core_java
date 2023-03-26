@@ -1,4 +1,4 @@
-public interface Collection {
+public interface Collection<T> {
     int size();
     boolean isEmpty();
     boolean add(Object item);

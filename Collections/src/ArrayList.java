@@ -1,13 +1,13 @@
 import java.util.NoSuchElementException;
 import java.util.Objects;
-public class ArrayList implements list {
-    private static class Iterator implements java.util.Iterator<Object> {
+public class ArrayList<T> implements list<t> {
+    private static class Iterator<T> implements java.util.Iterator<T> {
 
         private int CurI = 0;
-        private final ArrayList list;
+        private final ArrayList<T> list;
 
 
-        public Iterator(ArrayList list) {
+        public Iterator(ArrayList<T> list) {
             this.list = list;
         }
 
@@ -15,7 +15,7 @@ public class ArrayList implements list {
             return CurI < list.size();
         }
 
-        public Object next() throws NoSuchElementException {
+        public T next() throws NoSuchElementException {
             if (hasNext()) {
                 return list.get(CurI++);
             }
@@ -36,7 +36,7 @@ public class ArrayList implements list {
         }
     }
 
-    private ArrayList(Object[] data, int size) {
+    private ArrayList(T[] data, int size) {
         this.data = data;
         this.size = size;
     }
@@ -53,11 +53,11 @@ public class ArrayList implements list {
         return this.size == 0;
     }
 
-    public boolean contains(Object item) {
+    public boolean contains(T item) {
         return indexOf(item) >= 0;
     }
 
-    public boolean add(Object item) {
+    public boolean add(T item) {
         if (this.size + 1 >= this.data.length) {
             Object[] newData = new Object[((this.size + 1) * 3) / 2 + 1];
             System.arraycopy(this.data, 0, newData, 0, this.data.length);
@@ -68,7 +68,7 @@ public class ArrayList implements list {
         return true;
     }
 
-    public boolean remove(Object item) {
+    public boolean remove(T item) {
         int previousSize = this.size;
         int i = indexOf(item);
 
@@ -85,7 +85,7 @@ public class ArrayList implements list {
         this.size = 0;
     }
 
-    public void add(int index, Object item) {
+    public void add(int index, T item) {
         if (index == this.size) {
             add(item);
             return;
@@ -108,7 +108,7 @@ public class ArrayList implements list {
         this.size++;
     }
 
-    public void set(int i, Object item) {
+    public void set(int i, T item) {
         if (i == this.size) {
             add(item);
         } else if (i < this.size) {
@@ -116,13 +116,13 @@ public class ArrayList implements list {
         }
     }
 
-    public Object get(int index) throws IndexOutOfBoundsException {
+    public T get(int index) throws IndexOutOfBoundsException {
         checkI(index);
 
-        return this.data[index];
+        return (T) this.data[index];
     }
 
-    public int indexOf(Object item) {
+    public int indexOf(T item) {
         if (item == null) {
             return -1;
         }
@@ -136,7 +136,7 @@ public class ArrayList implements list {
         return -1;
     }
 
-    public int lastIndexOf(Object item) {
+    public int lastIndexOf(T item) {
         if (item == null) {
             return -1;
         }
@@ -150,7 +150,7 @@ public class ArrayList implements list {
         return -1;
     }
 
-    public Object removeAt(int index) throws IndexOutOfBoundsException {
+    public T removeAt(int index) throws IndexOutOfBoundsException {
         checkI(index);
 
         Object objectToReturn = this.data[index];
@@ -161,7 +161,7 @@ public class ArrayList implements list {
         return objectToReturn;
     }
 
-    public list subList(int left, int right) throws IndexOutOfBoundsException {
+    public list<T> subList(int left, int right) throws IndexOutOfBoundsException {
         checkI(left);
         checkI(right);
         int copySize = right - left;
@@ -170,7 +170,7 @@ public class ArrayList implements list {
         return new ArrayList(newlist, left - right);
     }
 
-    public Iterator iterator() {
+    public Iterator<T> iterator() {
         return new Iterator(this);
     }
 }

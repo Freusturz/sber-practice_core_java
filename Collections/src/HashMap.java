@@ -2,13 +2,13 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class HashMap implements Map {
+public class HashMap<K, V> implements Map<K, V> {
 
-    private final LinkedList[] buckets;
+    private final LinkedList<KeyValue<K, V>>[] buckets;
 
     private int size;
 
-    private LinkedList getBucket(int index) {
+    private LinkedList<KeyValue<K, V>> getBucket(int index) {
         if (this.buckets[index] == null) {
             return (this.buckets[index] = new LinkedList());
         }
@@ -16,10 +16,10 @@ public class HashMap implements Map {
         return this.buckets[index];
     }
 
-    private KeyValue getByKey(Object key) {
-        LinkedList bucket = getBucket(Objects.hashCode(key) % buckets.length);
+    private KeyValue<K, V> getByKey(Object key) {
+        LinkedList<KeyValue<K, V>> bucket = getBucket(Objects.hashCode(key) % buckets.length);
 
-        for (Object rawKvp : bucket) {
+        for (<KeyValue<K, V>> rawKvp : bucket) {
             KeyValue kvp = (KeyValue) rawKvp;
 
             if (Objects.equals(kvp.key, key)) {
@@ -30,13 +30,13 @@ public class HashMap implements Map {
         return null;
     }
 
-    private KeyValue getByValue(Object value) {
-        for (LinkedList bucket : this.buckets) {
+    private KeyValue<K, V> getByValue(K value) {
+        for (LinkedList<KeyValue<K, V>> bucket : this.buckets) {
             if (bucket == null) {
                 continue;
             }
 
-            for (Object rawKvp : bucket) {
+            for (<KeyValue<K, V>> rawKvp : bucket) {
                 KeyValue kvp = (KeyValue) rawKvp;
 
                 if (Objects.equals(kvp.value, value)) {
@@ -64,7 +64,7 @@ public class HashMap implements Map {
         return false;
     }
 
-    public boolean containsKey(Object key) {
+    public boolean containsKey(K key) {
         if (key == null) {
             return false;
         }
@@ -72,11 +72,11 @@ public class HashMap implements Map {
         return getByKey(key) != null;
     }
 
-    public boolean containsValue(Object value) {
+    public boolean containsValue(V value) {
         return getByValue(value) != null;
     }
 
-    public Object get(Object key) {
+    public V get(K key) {
         KeyValue kvp = getByKey(key);
 
         if (kvp == null) {
@@ -86,34 +86,34 @@ public class HashMap implements Map {
         return kvp.value;
     }
 
-    public Object put(Object key, Object value) {
-        LinkedList bucket = getBucket(Objects.hashCode(key) % buckets.length);
+    public V put(K key, V value) {
+        LinkedList<KeyValue<K, V>> bucket = getBucket(Objects.hashCode(key) % buckets.length);
 
         for (int i = 0; i < bucket.size(); i++) {
-            KeyValue kvp = (KeyValue) bucket.get(i);
+            KeyValue<K, V> kvp = (KeyValue) bucket.get(i);
 
             if (Objects.equals(kvp.key, key)) {
-                Object objectToReturn = kvp.value;
+                V objectToReturn = kvp.value;
                 bucket.set(i, new KeyValue(key, value));
                 return objectToReturn;
             }
         }
 
-        bucket.addLast(new KeyValue(key, value));
+        bucket.addLast(new KeyValue<>(key, value));
         this.size++;
         return null;
     }
 
-    public Object remove(Object key) {
-        LinkedList bucket = getBucket(Objects.hashCode(key) % buckets.length);
-        Iterator<Object> it = bucket.iterator();
+    public V remove(K key) {
+        LinkedList<KeyValue<K, V>> bucket = getBucket(Objects.hashCode(key) % buckets.length);
+        Iterator<KeyValue<K, V>> it = bucket.iterator();
         int index = 0;
 
         while (it.hasNext()) {
-            KeyValue kvp = (KeyValue) it.next();
+            KeyValue<K, V> kvp = (KeyValue) it.next();
 
             if (Objects.equals(kvp.key, key)) {
-                KeyValue previousKvp = (KeyValue) bucket.removeAt(index);
+                KeyValue<K, V> previousKvp = (KeyValue) bucket.removeAt(index);
                 this.size--;
                 return previousKvp.value;
             }
@@ -133,15 +133,15 @@ public class HashMap implements Map {
         return false;
     }
 
-    public Collection values() {
-        ArrayList newCollection = new ArrayList();
+    public Collection<V> values() {
+        ArrayList<V> newCollection = new ArrayList();
 
-        for (LinkedList bucket : this.buckets) {
+        for (LinkedList<KeyValue<K, V>> bucket : this.buckets) {
             if (bucket == null) {
                 continue;
             }
 
-            for (Object rawKvp : bucket) {
+            for (KeyValue<K, V> rawKvp : bucket) {
                 newCollection.add(((KeyValue) rawKvp).value);
             }
         }
@@ -149,15 +149,15 @@ public class HashMap implements Map {
         return newCollection;
     }
 
-    public Collection keySet() {
-        ArrayList newCollection = new ArrayList();
+    public Collection<K> keySet() {
+        ArrayList<K> newCollection = new ArrayList();
 
-        for (LinkedList bucket : this.buckets) {
+        for (LinkedList<KeyValue<K, V>> bucket : this.buckets) {
             if (bucket == null) {
                 continue;
             }
 
-            for (Object rawKvp : bucket) {
+            for (KeyValue<K, V> rawKvp : bucket) {
                 newCollection.add(((KeyValue) rawKvp).key);
             }
         }
@@ -165,15 +165,15 @@ public class HashMap implements Map {
         return newCollection;
     }
 
-    public Collection entrySet() {
-        ArrayList newCollection = new ArrayList();
+    public Collection<KeyValue<K, V>> entrySet() {
+        ArrayList<KeyValue<K, V>> newCollection = new ArrayList();
 
-        for (LinkedList bucket : this.buckets) {
+        for (LinkedList<KeyValue<K, V>> bucket : this.buckets) {
             if (bucket == null) {
                 continue;
             }
 
-            for (Object rawKvp : bucket) {
+            for (<KeyValue<K, V>> rawKvp : bucket) {
                 newCollection.add(rawKvp);
             }
         }

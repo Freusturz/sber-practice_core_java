@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class ArrayListDemo {
     //private ArrayList arrayList;
     public static void main(String[] args) {
-        ArrayList arrayList = new ArrayList();
+        ArrayList<Integer> arrayList = new ArrayList();
         System.out.println("Введите количество чисел");
         Scanner scanner = new Scanner(System.in);
         int number = scanner.nextInt();

@@ -1,18 +1,18 @@
 //import Java.Util.IndexOutOfBoundsException;
-public interface list extends Collection {
-    void add(int index, Object item);
+public interface list<T> extends Collection<T> {
+    void add(int index, T item);
 
-    void set(int index, Object item);
+    void set(int index, T item);
 
-    Object get(int index) throws IndexOutOfBoundsException;
+    T get(int index) throws IndexOutOfBoundsException;
 
-    int indexOf(Object item);
+    int indexOf(T item);
 
-    int lastIndexOf(Object item);
+    int lastIndexOf(T item);
     //
-    Object removeAt(int index) throws IndexOutOfBoundsException;
+    T removeAt(int index) throws IndexOutOfBoundsException;
 
-    list subList(int from, int to) throws IndexOutOfBoundsException;
+    list<T> subList(int from, int to) throws IndexOutOfBoundsException;
 }
 
 

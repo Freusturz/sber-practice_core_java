@@ -4,7 +4,7 @@ public class LinkedListDemo {
     private LinkedList linkedList;
 
     public static void main(String[] args) {
-        LinkedList linkedList = new LinkedList();
+        LinkedList<Integer> linkedList = new LinkedList();
         System.out.println("Введите количество чисел");
         Scanner scanner = new Scanner(System.in);
         int amountOfNumbers = scanner.nextInt();
