@@ -42,7 +42,6 @@ public class ArrayListDemo {
         number = scanner.nextInt();
         System.out.println(arrayList.contains(number));
 
-
         //set
         System.out.println("Введите номер элемента, который хотите заменить и на какое число");
         int num = scanner.nextInt();

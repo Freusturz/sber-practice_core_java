@@ -85,6 +85,7 @@ public class LinkedListDemo {
                     System.out.println("0 - Меню ");
                     num = scanner.nextInt();
                     break;
+
                 default:
                     break;
             }

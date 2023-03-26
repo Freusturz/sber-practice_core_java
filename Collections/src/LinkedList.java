@@ -324,7 +324,6 @@ public class LinkedList<T> implements Deque<T>, list<T>, Iterable<T> {
 
         return new LinkedList(getNode(from), getNode(to - 1), to - from);
     }
-
     public Iterator<T> iterator() {
         return new Iterator(this);
     }

@@ -123,7 +123,6 @@ public class HashMap<K, V> implements Map<K, V> {
 
         return null;
     }
-
     public void clear() {
         Arrays.fill(this.buckets, null);
         this.size = 0;

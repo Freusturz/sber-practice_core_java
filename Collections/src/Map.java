@@ -10,4 +10,5 @@ public interface Map<K, V> {
     Collection<V> values();
     Collection<K> keySet();
     Collection<KeyValue<K, V>> entrySet();
+
 }

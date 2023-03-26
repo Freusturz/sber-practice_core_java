@@ -5,5 +5,4 @@ public interface Collection<T> {
     boolean remove(Object item);
     void clear();
     boolean contains(Object item);
-    //
 }

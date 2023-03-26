@@ -9,10 +9,10 @@ public interface list<T> extends Collection<T> {
     int indexOf(T item);
 
     int lastIndexOf(T item);
-    //
     T removeAt(int index) throws IndexOutOfBoundsException;
 
     list<T> subList(int from, int to) throws IndexOutOfBoundsException;
+
 }
 
 
