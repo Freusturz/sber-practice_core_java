@@ -1,0 +1,17 @@
+public class StringContainer {
+        public String name;
+
+        public int count;
+
+
+    public StringContainer(String name, int i) {
+        this.name = name;
+        this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return name + " | " + count;
+    }
+
+}
