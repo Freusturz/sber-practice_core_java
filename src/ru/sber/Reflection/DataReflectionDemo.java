@@ -5,10 +5,9 @@ import ru.sber.Annotations.BaseClass;
 
 
 public class DataReflectionDemo {
-    private static BaseClass instClazz = null;
     public static void main(String[] args) throws Exception{
-        //instClazz = DataReflection.construct(3, "", 6, 9);
-        //System.err.println(instClazz);
+        BaseClass instClazz = DataReflection.construct(3, "");
+        System.err.println(instClazz);
 
         //DataContainer container = DataReflection.extract(instClazz);
         //container.getPrecedence();

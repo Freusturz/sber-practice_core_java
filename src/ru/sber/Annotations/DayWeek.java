@@ -1,9 +1,8 @@
 package ru.sber.Annotations;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+@Retention(RetentionPolicy.RUNTIME)
 @Inherited
 @Target(ElementType.TYPE)
 public @interface DayWeek {

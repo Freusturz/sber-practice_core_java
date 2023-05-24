@@ -63,7 +63,6 @@ public class HashMapDemo {
                     num = scanner.nextInt();
                     break;
                 case 9:
-
                     System.out.println("Меню: ");
                     System.out.println("1 - Размер хештаблицы ");
                     System.out.println("2 - Таблица не пуста? ");

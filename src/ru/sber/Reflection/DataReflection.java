@@ -27,7 +27,7 @@ public class DataReflection {
             IOWeekClass.class
     );
 
-    public static Class<? extends BaseClass> findClassByAnnotation(int dayOfTheWeek) {
+    private static Class<? extends BaseClass> findClassByAnnotation(int dayOfTheWeek) {
         for (Class<? extends BaseClass> clazz : reflectionChoices) {
             if (clazz.getAnnotation(DayWeek.class).dayWeek() == dayOfTheWeek) {
                 return clazz;
@@ -37,31 +37,20 @@ public class DataReflection {
         return null;
     }
 
-    public static BaseClass construct(int dayWeek, String description, int counter, double time) throws Exception {
+
+    public static BaseClass construct(int dayWeek, String description) throws Exception {
         Class<? extends BaseClass> clazzMetadata = findClassByAnnotation(dayWeek);
 
-        if (Objects.isNull(clazzMetadata)) {
-            throw new Exception(String.format("Не удалось найти подходящий класс для заданного dayWeek: %d", dayWeek));
-        }
+        Objects.requireNonNull(clazzMetadata);
 
         BaseClass instance = clazzMetadata.getConstructor().newInstance();
-
-        Field containerField = BaseClass.class.getDeclaredField("container");
-        containerField.setAccessible(true);
-
-        DataContainer dataContainer = new DataContainer();
-        dataContainer.setSpecification(description);
-        dataContainer.setPrecedence(counter);
-        dataContainer.setPeriod(time);
-        containerField.set(instance, dataContainer);
+        Method setter = clazzMetadata.getMethod("setData", String.class);
+        setter.invoke(instance, description);
 
         return instance;
     }
 
     public static void applyChanges(@NonNull BaseClass instance) throws Exception {
-        Field containerField = BaseClass.class.getDeclaredField("container");
-        containerField.setAccessible(true);
-
         Method setter = instance.getClass().getMethod("setData", String.class);
         Plan[] Plans = setter.getAnnotationsByType(Plan.class);
 
@@ -69,11 +58,6 @@ public class DataReflection {
 
         for (Plan schedule : Plans) {
             setter.invoke(instance, schedule.specification());
-
-            DataContainer container = (DataContainer) containerField.get(instance);
-            if (!Objects.equals(schedule.specification(), container.getSpecification())) {
-                throw new Exception("Не удалось установить новое значение при помощи аннотации");
-            }
         }
     }
 
