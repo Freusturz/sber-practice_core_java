@@ -26,9 +26,6 @@ public class Demo2 {
 
         Stream <StringContainer> StreamContainers = streamContainer.values().stream().flatMap(List::stream);
 
-        List <StringContainer> listOfContainers = StreamContainers.toList();
-        long count = listOfContainers.stream().count();
-
         //HM5
         String binaryString = Stream.generate(() -> rng.nextInt(0, 1)).limit(10).toString();
 
