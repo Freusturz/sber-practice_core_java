@@ -1,3 +1,5 @@
+package ru.sber.Streams;
+
 public class StringContainer {
         public String name;
 

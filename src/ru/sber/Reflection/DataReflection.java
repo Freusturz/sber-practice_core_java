@@ -7,7 +7,6 @@ import ru.sber.Annotations.DataContainer;
 import ru.sber.Annotations.BaseClass;
 import ru.sber.Annotations.NoAnnotationClass;
 import ru.sber.Annotations.WithAnnotationClass;
-import ru.sber.io.IOWeekClass;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -23,8 +22,7 @@ public class DataReflection {
 
     private static final List<Class<? extends BaseClass>> reflectionChoices = List.of(
             NoAnnotationClass.class,
-            WithAnnotationClass.class,
-            IOWeekClass.class
+            WithAnnotationClass.class
     );
 
     private static Class<? extends BaseClass> findClassByAnnotation(int dayOfTheWeek) {
