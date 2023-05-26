@@ -6,7 +6,7 @@ public class StringContainer {
         public int count;
 
 
-    public StringContainer(String name, int i) {
+    public StringContainer(String name, int count) {
         this.name = name;
         this.count = count;
     }

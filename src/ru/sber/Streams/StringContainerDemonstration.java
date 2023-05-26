@@ -9,7 +9,7 @@ public class StringContainerDemonstration {
 
     public static void main(String[] args) {
     //HM1
-        Stream.generate(new Random()::nextInt).filter(num -> num >= 10 && num <= 99)
+        Stream.generate(() -> rng.nextInt(10, 99))
                 .limit(10).sorted().collect(Collectors.averagingInt(value -> value));
     //HM2
         //Создайте класс-контейнер StreamContainer с полем name:String и count:long
